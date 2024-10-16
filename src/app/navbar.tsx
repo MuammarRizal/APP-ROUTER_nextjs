@@ -1,21 +1,43 @@
 import Link from "next/link";
+import { usePathname,useRouter } from "next/navigation";
 import React from "react";
 
 const Navbar = () => {
+  const pathname = usePathname();
+  const router = useRouter();
   return (
     <nav className="flex bg-slate-500 py-5 px-10">
       <h2 className="text-slate-800 mr-8 font-bold">Logo</h2>
-      <ul className="flex text-slate-300 gap-8">
-        <Link href={"/"}>
+      <ul className="flex text-slate-300 gap-8 items-center">
+        <Link
+          href={"/"}
+          className={pathname === "/" ? "text-blue-700" : "text-white"}
+        >
           <li className="cursor-pointer">Home</li>
         </Link>
-        <Link href={"/about"}>
+        <Link
+          href={"/about"}
+          className={pathname === "/about" ? "text-blue-700" : "text-white"}
+        >
           <li className="cursor-pointer">About</li>
         </Link>
-        <Link href={"/about/profile"}>
+        <Link
+          href={"/about/profile"}
+          className={
+            pathname === "/about/profile" ? "text-blue-700" : "text-white"
+          }
+        >
           <li className="cursor-pointer">Profile</li>
         </Link>
       </ul>
+      <div
+        className="button-auth ms-auto"
+        onClick={() => router.push("/login")}
+      >
+        <button className="bg-blue-500 text-white font-bold py-1 px-4 rounded hover:bg-blue-700">
+          Login
+        </button>
+      </div>
     </nav>
   );
 };
