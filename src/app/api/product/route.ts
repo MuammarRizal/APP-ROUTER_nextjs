@@ -14,6 +14,14 @@ export async function GET(req: NextRequest) {
       nama: "Adlian",
       npm: 202043502001,
     },
+    {
+      nama: "Uwan",
+      npm: 202043502002,
+    },
+    {
+      nama: "Rapit",
+      npm: 202043502001,
+    },
   ];
   return NextResponse.json({ status: 200, message: "Success", data });
 }
