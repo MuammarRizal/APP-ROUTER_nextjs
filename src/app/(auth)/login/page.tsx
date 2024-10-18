@@ -1,9 +1,20 @@
+"use client";
 import Link from "next/link";
 import React from "react";
 import LoginGif from "../../images/gif-login.gif";
 import Image from "next/image";
 
 const LoginPage = () => {
+  const handleLogin = (event: any) => {
+    event.preventDefault();
+    fetch("/api/auth/login", {
+      method: "post",
+      body: JSON.stringify({
+        email: event.currentTarget.email.value,
+        password: event.currentTarget.password.value,
+      }),
+    });
+  };
   return (
     <>
       <div className="bg-sky-100 flex justify-center items-center h-screen overflow-hidden">
@@ -16,7 +27,7 @@ const LoginPage = () => {
         </div>
         <div className="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
           <h1 className="text-2xl font-semibold mb-4">Login</h1>
-          <form action="#" method="POST">
+          <form onSubmit={handleLogin}>
             <div className="mb-4 bg-sky-100">
               <label htmlFor="email" className="block text-gray-600">
                 Email
