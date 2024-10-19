@@ -3,28 +3,42 @@ import { NextRequest, NextResponse } from "next/server";
 const data = [
   {
     id: 1,
-    nama: "muammarizal",
-    npm: 202043502004,
+    title: "Belajar",
+    price: 123,
+    description: "Belajar Jaringan",
+    category: "belajar",
+    image:
+      "https://mtsn1nganjuk.sch.id/wp-content/uploads/2022/07/Pengertian-Belajar-Ciri-ciri-Belajar-dan-Prinsip-Belajar-626x393-1.jpg",
+    rating: {
+      rate: 12,
+      count: 5,
+    },
   },
   {
     id: 2,
-    nama: "alfina rahmalia",
-    npm: 202043502002,
+    title: "Belajar",
+    price: 123,
+    description: "Belajar API",
+    category: "belajar",
+    image:
+      "https://stg.pahamify.com/wp-content/uploads/2021/01/Mengembalikan-Semangat-Belajar-Setelah-Liburan-03-1024x576.png",
+    rating: {
+      rate: 12,
+      count: 5,
+    },
   },
   {
-    id: 3,
-    nama: "Adlian",
-    npm: 202043502001,
-  },
-  {
-    id: 4,
-    nama: "Uwan",
-    npm: 202043502002,
-  },
-  {
-    id: 5,
-    nama: "Rapit",
-    npm: 202043502001,
+    id: 2,
+    title: "Belajar",
+    price: 123,
+    description: "Belajar API",
+    category: "belajar",
+    image:
+      "https://stg.pahamify.com/wp-content/uploads/2021/01/Mengembalikan-Semangat-Belajar-Setelah-Liburan-03-1024x576.png",
+    rating: {
+      rate: 12,
+      count: 5,
+    },
   },
 ];
 
@@ -39,6 +53,7 @@ export async function GET(req: NextRequest) {
         codeStatus: 200,
         status: true,
         message: "Get data detail success",
+        ok: true,
         dataDetail,
       });
     }
