@@ -24,7 +24,7 @@ export default function AdminProductPage() {
     // window.location.href = "/products";
   };
   return (
-    <div className="container m-auto text-center">
+    <div className="w-3/6 h-60 bg-gray-400 rounded-[12px] flex justify-center items-center">
       <h1>{status}</h1>
       <button
         className="button border-y-2 bg-blue-300 text-black p-5"
