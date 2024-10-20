@@ -17,9 +17,11 @@ type Product = {
 };
 
 const getData = async () => {
-  // const res = await fetch("https://fakestoreapi.com/products");
+  // const res = await fetch("https://fakestoreapi.com/products", {
+  //   cache: "no-store",
+  // });
   const res = await fetch("http://localhost:3000/api/product", {
-    cache: "force-cache",
+    cache: "no-store",
     next: {
       // revalidate: 30,
       tags: ["products"],
@@ -45,7 +47,7 @@ const ProductPage = async ({ params }: PropsProduct) => {
               key={product.id}
               className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 "
             >
-              <a href="#">
+              <a href={`/products/${product.id}`}>
                 <img
                   className={"p-8 rounded-t-lg w-full h-72 object-cover"}
                   src={product.image}
@@ -53,7 +55,7 @@ const ProductPage = async ({ params }: PropsProduct) => {
                 />
               </a>
               <div className="px-5 pb-5">
-                <a href="#">
+                <a href={`/products/${product.id}`}>
                   <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
                     {product.title}
                   </h5>
