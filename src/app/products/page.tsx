@@ -1,3 +1,5 @@
+import { getData } from "@/services/products";
+import Link from "next/link";
 import React from "react";
 type PropsProduct = {
   params: { slug: string[] };
@@ -16,50 +18,32 @@ type Product = {
   };
 };
 
-const getData = async () => {
-  // const res = await fetch("https://fakestoreapi.com/products", {
-  //   cache: "no-store",
-  // });
-  const res = await fetch("http://localhost:3000/api/product", {
-    cache: "no-store",
-    next: {
-      // revalidate: 30,
-      tags: ["products"],
-    },
-  });
-
-  if (!res.ok) {
-    throw new Error("Failed fetching");
-  }
-  return res.json();
-};
-
 const ProductPage = async ({ params }: PropsProduct) => {
-  const products = await getData();
+  const products = await getData("http://localhost:3000/api/product");
 
   return (
     <>
-      <h2>{params.slug ? "Detail Products" : "Product Page"}</h2>
-      <div className="container grid grid-cols-3 gap-4 justify-center w-full mx-auto">
+      {/* <h2>{params.slug ? "Detail Products" : "Product Page"}</h2> */}
+      <div className="container mt-2 grid grid-cols-3 gap-4 justify-center w-full mx-auto">
         {products.data.length > 0 &&
           products.data.map((product: Product) => (
             <div
               key={product.id}
               className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 "
             >
-              <a href={`/products/${product.id}`}>
+              <Link href={`/products/detail/${product.id}`}>
                 <img
                   className={"p-8 rounded-t-lg w-full h-72 object-cover"}
                   src={product.image}
                   alt={product.title}
                 />
-              </a>
+              </Link>
               <div className="px-5 pb-5">
-                <a href={`/products/${product.id}`}>
+                <Link href={`/products/detail/?id=${product.id}`}>
                   <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
                     {product.title}
                   </h5>
-                </a>
+                </Link>
                 <div className="flex items-center mt-2.5 mb-5">
                   <div className="flex items-center space-x-1 rtl:space-x-reverse">
                     <svg
@@ -120,12 +104,12 @@ const ProductPage = async ({ params }: PropsProduct) => {
                     <span className="text-3xl font-bold text-gray-900 dark:text-white">
                       ${product.price}
                     </span>
-                    <a
-                      href="#"
+                    <button
+                      type="button"
                       className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     >
                       Add to cart
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>
