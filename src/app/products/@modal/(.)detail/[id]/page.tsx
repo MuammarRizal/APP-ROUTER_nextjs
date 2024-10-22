@@ -5,6 +5,7 @@ type Product = {
   dataDetail: {
     id: number;
     title: string;
+    name: string;
     price: number;
     description: string;
     category: string;
@@ -22,11 +23,11 @@ export default async function DetailProductPage(props: any) {
     <Modal>
       <img
         src={product.dataDetail.image}
-        alt={product.dataDetail.title}
+        alt={product.dataDetail.name}
         className="object-top object-contain aspect-square col-span-2"
       />
       <div className="bg-white p-4 px-6">
-        <h3>{product.dataDetail.title}</h3>
+        <h3>{product.dataDetail?.title || product.dataDetail.name}</h3>
         <p>Price : ${product.dataDetail.price}</p>
       </div>
     </Modal>

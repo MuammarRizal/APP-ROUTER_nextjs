@@ -9,6 +9,7 @@ type Product = {
   id: number;
   title: string;
   price: number;
+  name: string;
   description: string;
   category: string;
   image: string;
@@ -41,7 +42,7 @@ const ProductPage = async ({ params }: PropsProduct) => {
               <div className="px-5 pb-5">
                 <Link href={`/products/detail/?id=${product.id}`}>
                   <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                    {product.title}
+                    {product?.title || product.name}
                   </h5>
                 </Link>
                 <div className="flex items-center mt-2.5 mb-5">
