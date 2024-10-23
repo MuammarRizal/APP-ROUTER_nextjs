@@ -3,17 +3,35 @@ import Link from "next/link";
 import React from "react";
 import LoginGif from "../../images/gif-login.gif";
 import Image from "next/image";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
-  const handleLogin = (event: any) => {
+  const { push } = useRouter();
+  const handleLogin = async (event: any) => {
     event.preventDefault();
-    fetch("/api/auth/login", {
-      method: "post",
-      body: JSON.stringify({
-        email: event.currentTarget.email.value,
-        password: event.currentTarget.password.value,
-      }),
-    });
+    try {
+      const res = await signIn("credentials", {
+        redirect: false,
+        email: event.target.email.value,
+        password: event.target.password.value,
+        callbackUrl: "/dashboard",
+      });
+      if (!res?.error) {
+        push("/dashboard");
+      } else {
+        console.log(res.error);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    // fetch("/api/auth/login", {
+    //   method: "post",
+    //   body: JSON.stringify({
+    //     email: event.currentTarget.email.value,
+    //     password: event.currentTarget.password.value,
+    //   }),
+    // });
   };
   return (
     <>
